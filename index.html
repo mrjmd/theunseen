@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Unseen: Pitch Deck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for the Modern Mysticism aesthetic */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+            overflow: hidden; /* Prevent scrollbars from interfering with slideshow */
+        }
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+        .slide {
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            will-change: opacity, transform;
+        }
+        .slide-hidden {
+            opacity: 0;
+            transform: scale(0.98);
+            pointer-events: none;
+            position: absolute;
+        }
+        .slide-active {
+            opacity: 1;
+            transform: scale(1);
+            position: relative;
+        }
+        .text-glow-cyan {
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.7), 0 0 12px rgba(0, 255, 255, 0.5);
+        }
+        .text-glow-magenta {
+            text-shadow: 0 0 8px rgba(255, 0, 255, 0.7), 0 0 12px rgba(255, 0, 255, 0.5);
+        }
+        .text-glow-gold {
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.7), 0 0 12px rgba(255, 215, 0, 0.5);
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .slide-indicator {
+            transition: all 0.3s ease;
+        }
+        .slide-indicator.active {
+            background-color: #00FFFF; /* Cyan */
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="w-screen h-screen flex flex-col items-center justify-center p-4 sm:p-8">
+
+    <!-- Slideshow Container -->
+    <div id="slideshow-container" class="w-full h-full max-w-5xl max-h-[700px] flex items-center justify-center relative">
+        
+        <!-- Slide 1: Title -->
+        <div class="slide slide-active w-full h-full flex flex-col items-center justify-center text-center p-8">
+            <div class="mb-8">
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 75C63.8071 75 75 63.8071 75 50C75 36.1929 63.8071 25 50 25C36.1929 25 25 36.1929 25 50C25 63.8071 36.1929 75 50 75Z" stroke="url(#paint0_radial_101_2)" stroke-width="2"/>
+                    <path d="M50 62.5C56.9036 62.5 62.5 56.9036 62.5 50C62.5 43.0964 56.9036 37.5 50 37.5C43.0964 37.5 37.5 43.0964 37.5 50C37.5 56.9036 43.0964 62.5 50 62.5Z" fill="url(#paint1_radial_101_2)"/>
+                    <path d="M50 50V85" stroke="url(#paint2_linear_101_2)" stroke-width="2"/>
+                    <path d="M45 85H55" stroke="url(#paint3_linear_101_2)" stroke-width="2" stroke-linecap="round"/>
+                    <defs>
+                        <radialGradient id="paint0_radial_101_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(25)">
+                            <stop stop-color="#00FFFF"/>
+                            <stop offset="1" stop-color="#FF00FF" stop-opacity="0.5"/>
+                        </radialGradient>
+                        <radialGradient id="paint1_radial_101_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(12.5)">
+                            <stop stop-color="#00FFFF"/>
+                            <stop offset="1" stop-color="#00FFFF" stop-opacity="0"/>
+                        </radialGradient>
+                        <linearGradient id="paint2_linear_101_2" x1="50.5" y1="50" x2="50.5" y2="85" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#00FFFF"/>
+                            <stop offset="1" stop-color="#FF00FF" stop-opacity="0.5"/>
+                        </linearGradient>
+                         <linearGradient id="paint3_linear_101_2" x1="45" y1="85.5" x2="55" y2="85.5" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF00FF"/>
+                            <stop offset="1" stop-color="#FFD700" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1 class="font-cinzel text-4xl sm:text-6xl font-bold tracking-widest text-glow-cyan">THE UNSEEN</h1>
+            <p class="mt-4 text-lg sm:text-xl text-gray-400 font-light tracking-wider">A Mystery School for the Modern Soul</p>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center text-center p-8">
+            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8 text-glow-magenta">The Great Disconnection</h2>
+             <div class="grid grid-cols-2 gap-4 mb-8 w-full max-w-2xl">
+                <img src="https://placehold.co/400x300/1a1a1a/555555?text=Alone+in+a+Crowd" alt="Alone in a crowd" class="rounded-lg opacity-60 grayscale">
+                <img src="https://placehold.co/400x300/1a1a1a/555555?text=Couple+on+Phones" alt="Couple on phones" class="rounded-lg opacity-60 grayscale">
+                <img src="https://placehold.co/400x300/1a1a1a/555555?text=Curated+Feed" alt="Curated social media feed" class="rounded-lg opacity-60 grayscale">
+                <img src="https://placehold.co/400x300/1a1a1a/555555?text=Work+Stress" alt="Person stressed at computer" class="rounded-lg opacity-60 grayscale">
+            </div>
+            <ul class="text-left space-y-4 text-gray-300 text-base sm:text-lg max-w-2xl">
+                <li><strong class="text-white">Superficial Connection:</strong> Social media promotes performance over presence.</li>
+                <li><strong class="text-white">Fear of Vulnerability:</strong> We are taught to hide our true feelings, leaving us feeling unseen.</li>
+                <li><strong class="text-white">Solitary Solutions:</strong> The wellness industry teaches us to be with ourselves, but not how to be with others.</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 3: The Opportunity -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center text-center p-8">
+             <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8 text-glow-gold">A New Market Category</h2>
+             <p class="max-w-3xl mb-8 text-gray-400">We sit at the intersection of three massive, validated markets:</p>
+             <div class="w-full max-w-2xl h-64 relative mb-8">
+                 <div class="absolute top-0 left-1/4 w-48 h-48 border-2 border-cyan-500 rounded-full flex items-center justify-center text-center p-4"><p>Mindfulness Apps<br><span class="text-xs text-gray-400">($2.48B by 2025)</span></p></div>
+                 <div class="absolute top-0 right-1/4 w-48 h-48 border-2 border-magenta-500 rounded-full flex items-center justify-center text-center p-4"><p>Social & Dating<br><span class="text-xs text-gray-400">($310B by 2030)</span></p></div>
+                 <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-48 border-2 border-yellow-500 rounded-full flex items-center justify-center text-center p-4"><p>Connection Games</p></div>
+                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm"><p class="font-bold text-glow-cyan">UNSEEN</p></div>
+             </div>
+             <p class="font-bold text-lg sm:text-xl text-cyan-400">The Unseen is the first app to gamify authentic connection in real-time.</p>
+        </div>
+
+        <!-- Slide 4: Our Solution -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center text-center p-8">
+            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8 text-glow-cyan">Our Solution: The Unseen</h2>
+            <img src="https://placehold.co/600x300/000000/FFFFFF?text=Two+hands+almost+touching" alt="Two hands almost touching with an arc of light between them" class="rounded-lg mb-8 shadow-2xl shadow-cyan-500/20">
+            <div class="max-w-3xl">
+                <p class="text-lg sm:text-xl mb-4">A gamified, P2P mobile experience that turns everyday moments into opportunities for profound connection.</p>
+                <p class="text-lg sm:text-xl font-bold text-magenta-400">It's a "Trojan horse" for personal growth.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 5: How It Works -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center text-center p-8">
+             <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8 text-glow-magenta">The Core Loop</h2>
+             <div class="space-y-4 max-w-md text-left text-lg">
+                <div class="flex items-center space-x-4"><span class="text-2xl text-cyan-400">1.</span> <p><strong>Anonymous Discovery:</strong> Find nearby users via Bluetooth LE.</p></div>
+                <div class="flex items-center space-x-4"><span class="text-2xl text-cyan-400">2.</span> <p><strong>Tiered Prompts:</strong> Opt-in to levels of vulnerability.</p></div>
+                <div class="flex items-center space-x-4"><span class="text-2xl text-cyan-400">3.</span> <p><strong>Gamified Reflection:</strong> Earn points through private self-reflection.</p></div>
+                <div class="flex items-center space-x-4"><span class="text-2xl text-cyan-400">4.</span> <p><strong>The Quest:</strong> Get prompted to connect face-to-face.</p></div>
+                <div class="flex items-center space-x-4"><span class="text-2xl text-cyan-400">5.</span> <p><strong>Gamified Rejection:</strong> Turn "negative" feelings into a new way to play.</p></div>
+             </div>
+        </div>
+
+        <!-- Slide 6: Target Audience -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center p-8">
+            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8 text-glow-gold">Go-to-Market Strategy</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl w-full">
+                <div class="bg-white/5 p-6 rounded-lg border border-gray-700">
+                    <h3 class="font-cinzel text-2xl font-bold mb-4 text-cyan-400">The Evangelists</h3>
+                    <p class="font-bold">Who:</p>
+                    <p class="mb-4 text-gray-400">The global Authentic Relating, Circling, and Shadow Work communities.</p>
+                    <p class="font-bold">Strategy:</p>
+                    <p class="text-gray-400">A pre-launch alpha program with community leaders to create our first evangelists.</p>
+                </div>
+                <div class="bg-white/5 p-6 rounded-lg border border-gray-700">
+                    <h3 class="font-cinzel text-2xl font-bold mb-4 text-magenta-400">The Mainstream</h3>
+                    <p class="font-bold">Who:</p>
+                    <p class="mb-4 text-gray-400">Millennials & Gen Z, disillusioned with social media and invested in wellness.</p>
+                    <p class="font-bold">Strategy:</p>
+                    <p class="text-gray-400">Market as a fun, edgy social game. The deeper elements are revealed as the user progresses.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Market Projections -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center text-center p-8">
+            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8 text-glow-cyan">Market Projections (MAU)</h2>
+            <div class="w-full max-w-2xl p-4">
+                <!-- A simple SVG chart -->
+                <svg viewBox="0 0 300 150" class="w-full h-auto">
+                    <line x1="20" y1="130" x2="280" y2="130" stroke="#4A5568" />
+                    <line x1="20" y1="20" x2="20" y2="130" stroke="#4A5568" />
+                    <path d="M 20 120 C 80 110, 150 60, 270 30" stroke="#00FFFF" stroke-width="3" fill="none" />
+                    <text x="30" y="145" fill="#A0AEC0" font-size="8">Year 1</text>
+                    <text x="250" y="145" fill="#A0AEC0" font-size="8">Year 5</text>
+                    <text x="5" y="122" fill="#A0AEC0" font-size="8">50k</text>
+                    <text x="5" y="32" fill="#A0AEC0" font-size="8">5M</text>
+                </svg>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 text-sm w-full max-w-3xl mt-4">
+                <p><strong>Year 1:</strong> 50,000</p>
+                <p><strong>Year 2:</strong> 250,000</p>
+                <p><strong>Year 3:</strong> 1,000,000</p>
+                <p><strong>Year 4:</strong> 2,500,000</p>
+                <p><strong>Year 5:</strong> 5,000,000</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Business Model -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center text-center p-8">
+            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8 text-glow-magenta">Business Model</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-3xl w-full mb-8">
+                <div class="text-center">
+                    <p class="text-6xl mb-2">🔑</p>
+                    <h3 class="font-bold text-xl">Free Tier</h3>
+                    <p class="text-gray-400">Limited access to high-tier messages and quests.</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-6xl mb-2">👑</p>
+                    <h3 class="font-bold text-xl">Subscription</h3>
+                    <p class="text-gray-400">$9.99/month or $59.99/year for unlimited usage.</p>
+                </div>
+            </div>
+            <h3 class="font-cinzel text-2xl font-bold mb-4 text-glow-gold">Revenue Projections (3% Conversion)</h3>
+            <div class="grid grid-cols-3 gap-4 text-lg">
+                <p><strong>Year 1:</strong> $105,000</p>
+                <p><strong>Year 3:</strong> $2.1M</p>
+                <p><strong>Year 5:</strong> $10.5M</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: The Team -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center text-center p-8">
+            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8 text-glow-cyan">The Team</h2>
+            <p class="mb-8 max-w-2xl text-lg text-gray-300">We are a world-class team of builders and thinkers, obsessed with creating transformative experiences.</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4 text-left max-w-4xl">
+                <p><strong>CEO:</strong> Vision & Strategy</p>
+                <p><strong>Lead Engineer:</strong> P2P & Security</p>
+                <p><strong>Product Manager:</strong> User Needs & Impact</p>
+                <p><strong>QA Lead:</strong> Edge Cases & Safety</p>
+                <p><strong>Designer:</strong> UX & Psychological Safety</p>
+                <p><strong>Creative Director:</strong> Brand & Narrative</p>
+                <p><strong>DevOps / SRE:</strong> Reliability & Scale</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: The Ask -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center text-center p-8">
+            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-4 text-glow-gold">The Ask</h2>
+            <p class="font-cinzel text-6xl sm:text-7xl font-bold my-8 text-cyan-400">$1.5 Million</p>
+            <p class="text-xl mb-8">in seed funding for 18 months of runway to:</p>
+            <ul class="text-left space-y-3 text-lg max-w-md">
+                <li>Hire 2 additional mobile engineers.</li>
+                <li>Build and launch the MVP within 9 months.</li>
+                <li>Fund initial user acquisition and community-building.</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 11: The Roadmap -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center p-8">
+            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8 text-glow-magenta">The Roadmap</h2>
+            <div class="w-full max-w-sm space-y-6">
+                <div class="flex items-center space-x-4">
+                    <p class="text-3xl">🜃</p> <!-- Earth/Salt Symbol -->
+                    <div>
+                        <h3 class="font-bold text-lg">Phase 1: MVP (9 Months)</h3>
+                        <p class="text-gray-400">Test the core loop of interaction and reflection.</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <p class="text-3xl">🜁</p> <!-- Air/Sulphur Symbol -->
+                    <div>
+                        <h3 class="font-bold text-lg">Phase 2: Gamification (6 Months)</h3>
+                        <p class="text-gray-400">Introduce higher-risk tiers and leaderboards.</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <p class="text-3xl">🜄</p> <!-- Water/Mercury Symbol -->
+                    <div>
+                        <h3 class="font-bold text-lg">Phase 3: Full Experience (6 Months)</h3>
+                        <p class="text-gray-400">Launch the In-the-Moment Quest & Shadow Council.</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <p class="text-3xl">🜂</p> <!-- Fire/Quintessence Symbol -->
+                    <div>
+                        <h3 class="font-bold text-lg">Phase 4: Community (Ongoing)</h3>
+                        <p class="text-gray-400">Develop tools for community-hosted games.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Closing -->
+        <div class="slide slide-hidden w-full h-full flex flex-col items-center justify-center text-center p-8">
+             <div class="mb-8">
+                <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 75C63.8071 75 75 63.8071 75 50C75 36.1929 63.8071 25 50 25C36.1929 25 25 36.1929 25 50C25 63.8071 36.1929 75 50 75Z" stroke="url(#paint0_radial_101_2_final)" stroke-width="3"/>
+                    <path d="M50 62.5C56.9036 62.5 62.5 56.9036 62.5 50C62.5 43.0964 56.9036 37.5 50 37.5C43.0964 37.5 37.5 43.0964 37.5 50C37.5 56.9036 43.0964 62.5 50 62.5Z" fill="url(#paint1_radial_101_2_final)"/>
+                    <path d="M50 50V85" stroke="url(#paint2_linear_101_2_final)" stroke-width="3"/>
+                    <path d="M45 85H55" stroke="url(#paint3_linear_101_2_final)" stroke-width="3" stroke-linecap="round"/>
+                    <defs>
+                        <radialGradient id="paint0_radial_101_2_final" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(25)">
+                            <stop stop-color="#00FFFF"><animate attributeName="stop-color" values="#00FFFF;#FF00FF;#FFD700;#00FFFF" dur="5s" repeatCount="indefinite" /></stop>
+                            <stop offset="1" stop-color="#FF00FF" stop-opacity="0.7"><animate attributeName="stop-color" values="#FF00FF;#FFD700;#00FFFF;#FF00FF" dur="5s" repeatCount="indefinite" /></stop>
+                        </radialGradient>
+                        <radialGradient id="paint1_radial_101_2_final" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(12.5)">
+                            <stop stop-color="#00FFFF"/>
+                            <stop offset="1" stop-color="#00FFFF" stop-opacity="0"/>
+                        </radialGradient>
+                        <linearGradient id="paint2_linear_101_2_final" x1="50.5" y1="50" x2="50.5" y2="85" gradientUnits="userSpaceOnUse">
+                             <stop stop-color="#00FFFF"><animate attributeName="stop-color" values="#00FFFF;#FF00FF;#FFD700;#00FFFF" dur="5s" repeatCount="indefinite" /></stop>
+                            <stop offset="1" stop-color="#FF00FF" stop-opacity="0.5"><animate attributeName="stop-color" values="#FF00FF;#FFD700;#00FFFF;#FF00FF" dur="5s" repeatCount="indefinite" /></stop>
+                        </linearGradient>
+                         <linearGradient id="paint3_linear_101_2_final" x1="45" y1="85.5" x2="55" y2="85.5" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF00FF"/>
+                            <stop offset="1" stop-color="#FFD700" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <p class="font-cinzel text-2xl sm:text-3xl max-w-2xl">The Unseen is more than an app.</p>
+            <p class="font-cinzel text-2xl sm:text-3xl max-w-2xl font-bold mt-2 text-glow-cyan">It's a movement back to ourselves, through each other.</p>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="absolute bottom-4 sm:bottom-8 w-full flex items-center justify-center space-x-4 z-10">
+        <button id="prev-btn" class="nav-button p-3 rounded-full bg-white/5 backdrop-blur-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        
+        <div id="indicator-container" class="flex space-x-2">
+            <!-- Indicators will be generated by JS -->
+        </div>
+
+        <button id="next-btn" class="nav-button p-3 rounded-full bg-white/5 backdrop-blur-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+    </div>
+
+    <script>
+        // --- Slideshow Logic ---
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const indicatorContainer = document.getElementById('indicator-container');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        // --- Create Indicators ---
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('div');
+            indicator.classList.add('slide-indicator', 'w-2', 'h-2', 'rounded-full', 'bg-gray-700', 'cursor-pointer');
+            indicator.addEventListener('click', () => showSlide(i));
+            indicatorContainer.appendChild(indicator);
+        }
+        const indicators = document.querySelectorAll('.slide-indicator');
+
+        // --- Function to show a specific slide ---
+        function showSlide(n) {
+            // Hide current slide
+            slides[currentSlide].classList.remove('slide-active');
+            slides[currentSlide].classList.add('slide-hidden');
+            indicators[currentSlide].classList.remove('active');
+
+            // Calculate next slide index
+            currentSlide = (n + totalSlides) % totalSlides;
+
+            // Show new slide
+            slides[currentSlide].classList.remove('slide-hidden');
+            slides[currentSlide].classList.add('slide-active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        // --- Event Listeners ---
+        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                showSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft') {
+                showSlide(currentSlide - 1);
+            }
+        });
+
+        // --- Initial State ---
+        showSlide(0);
+
+    </script>
+</body>
+</html>
