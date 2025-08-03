@@ -39,7 +39,7 @@
         const slideData = [
             {
                 type: 'title',
-                logoUrl: 'https://storage.googleapis.com/gemini-generative-ai-public/images/993c9d69-d48e-4a6c-af7a-1317c2f89f2a.png',
+                logoUrl: 'images/obelisk.jpg',
                 title: 'THE UNSEEN',
                 subtitle: "We're already whole. For those with the eyes to see."
             },
@@ -47,7 +47,7 @@
                 type: 'split',
                 title: 'The Core Problem: The Great Forgetting',
                 body: "Our culture teaches a fundamental lie: that parts of ourselves are unacceptable and must be hidden to ensure safety and belonging. We are not sanitizing ourselves because of Instagram; we are sanitizing ourselves because our somatic understanding of safety is rooted in the belief that we can never show the world who we really are.<br/><br/>This isn't a crisis of technology; it's a crisis of self-rejection.",
-                image: 'https://storage.googleapis.com/gemini-generative-ai-public/images/7a0f4438-e9f3-45a8-9418-508b9826d9e0.png',
+                image: 'images/mask.jpg',
                 image_position: 'right'
             },
             {
@@ -195,7 +195,7 @@
             switch (data.type) {
                 case 'title':
                     slideHtml += `<div class="w-full h-full flex flex-col items-center justify-center text-center">
-                        <img src="${data.logoUrl}" alt="The Unseen Logo" class="w-32 h-32 mb-8 animate-pulse">
+                        <img src="${data.logoUrl}" alt="The Unseen Logo" class="w-100 h-80 mb-8 animate-pulse">
                         <h1 class="font-cinzel text-5xl sm:text-7xl font-black tracking-widest relative glitch-text" data-text="${data.title}">${data.title}</h1>
                         <p class="mt-4 text-lg sm:text-xl text-gray-400 tracking-wider">${data.subtitle}</p>
                     </div>`;
