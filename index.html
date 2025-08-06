@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Unseen: Pitch Deck [Alchemical Glitch v5 - Swipe Enabled]</title>
+    <title>The Unseen: Pitch Deck [Alchemical Glitch v6 - Mobile Layout Fixes]</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +52,7 @@
         .data-card { border: 1px solid #333; background-color: rgba(20,20,20,0.3); backdrop-filter: blur(5px); }
     </style>
 </head>
-<body class="w-screen h-screen flex flex-col items-center justify-center p-4 sm:p-8">
+<body class="w-screen flex flex-col items-center justify-center p-4 sm:p-8">
 
     <!-- Container now has a touch-action property to improve swipe experience -->
     <div id="slideshow-container" class="w-full h-full max-w-5xl max-h-[700px] flex items-center justify-center relative border-2 border-gray-800 bg-black/20" style="touch-action: pan-y;">
@@ -282,10 +282,10 @@
                     </div>`;
                     break;
                 case 'split':
-                    innerHtml = `<div class="w-full h-full flex flex-col md:flex-row items-center gap-8 ${data.image_position === 'left' ? 'md:flex-row-reverse' : ''}">
-                        <div class="w-full md:w-1/2 h-full bg-cover bg-center" style="background-image: url('${data.image}')"></div>
-                        <div class="w-full md:w-1/2 flex flex-col justify-center text-left p-4">
-                            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8">${data.title}</h2>
+                    innerHtml = `<div class="w-full h-full flex flex-col md:flex-row items-center justify-center gap-0 md:gap-8 ${data.image_position === 'left' ? 'md:flex-row-reverse' : ''}">
+                        <div class="w-full h-48 md:h-full md:w-1/2 bg-cover bg-center rounded-t-lg md:rounded-lg" style="background-image: url('${data.image}')"></div>
+                        <div class="w-full md:w-1/2 flex flex-col justify-center text-left p-6 md:p-4">
+                            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-4 md:mb-8">${data.title}</h2>
                             <div class="text-base sm:text-lg text-gray-300">${data.body}</div>
                         </div>
                     </div>`;
@@ -295,7 +295,7 @@
                         <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8">${data.title}</h2>
                         <div class="max-w-3xl text-lg text-gray-300 mb-8">${data.body}</div>
                         ${data.cards ? `
-                            <div class="grid md:grid-cols-2 gap-4 w-full max-w-4xl">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl">
                                 ${data.cards.map(card => `<div class="data-card p-6 rounded-lg text-left"><h3 class="font-bold text-xl mb-2 text-cyan-400">${card.title}</h3><p class="text-gray-300">${card.body}</p></div>`).join('')}
                             </div>
                         ` : ''}
@@ -305,7 +305,7 @@
                      innerHtml = `<div class="w-full h-full flex flex-col items-center justify-center text-center">
                         <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-4">${data.title}</h2>
                         <p class="max-w-3xl mb-8 text-gray-400">${data.body}</p>
-                        <div class="grid md:grid-cols-3 gap-4 w-full max-w-4xl text-center">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-4xl text-center">
                             ${data.stats.map(stat => `
                                 <div class="data-card p-4 rounded-lg">
                                     <p class="text-3xl font-bold text-cyan-400">${stat.value}</p>
@@ -323,15 +323,15 @@
                             <p class="text-lg text-gray-300 mb-6">${data.body}</p>
                             <p class="text-xl text-cyan-400 data-card p-4 rounded-lg">EG: "${data.prompt}"</p>
                         </div>
-                        <div class="w-full md:w-1/2 flex items-center justify-center">
-                            <img src="${data.ui_image}" alt="UI Mockup" class="max-h-[500px] border-2 border-gray-700 rounded-2xl" loading="lazy">
+                        <div class="w-full md:w-1/2 flex items-center justify-center mt-4 md:mt-0">
+                            <img src="${data.ui_image}" alt="UI Mockup" class="max-h-[400px] sm:max-h-[500px] border-2 border-gray-700 rounded-2xl" loading="lazy">
                         </div>
                     </div>`;
                     break;
                 case 'business':
                      innerHtml = `<div class="w-full h-full flex flex-col items-center justify-center text-center">
                         <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8">${data.title}</h2>
-                        <div class="grid md:grid-cols-2 gap-4 w-full max-w-4xl text-left">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl text-left">
                             ${data.items.map(item => `
                                 <div class="data-card p-4 rounded-lg">
                                     <h3 class="font-bold text-lg text-cyan-400 mb-2">${item.title}</h3>
@@ -342,19 +342,20 @@
                      </div>`;
                     break;
                 case 'paradox':
-                     innerHtml = `<div class="w-full h-full flex flex-col md:flex-row items-center gap-8 ${data.image_position === 'left' ? 'md:flex-row-reverse' : ''}">
-                         <div class="w-full md:w-1/2 h-full bg-cover bg-center" style="background-image: url('${data.image}')"></div>
-                         <div class="w-full md:w-1/2 flex flex-col justify-center text-left">
-                            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8">${data.title}</h2>
-                            <ul class="text-left space-y-4 text-xl">
+                     innerHtml = `<div class="w-full h-full flex flex-col md:flex-row items-center justify-center gap-0 md:gap-8">
+                         <div class="w-full h-48 md:h-full md:w-1/2 bg-cover bg-center rounded-t-lg md:rounded-lg" style="background-image: url('${data.image}')"></div>
+                         <div class="w-full md:w-1/2 flex flex-col justify-center text-left p-6 md:p-4">
+                            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-4 md:mb-8">${data.title}</h2>
+                            <ul class="text-left space-y-4 text-lg sm:text-xl">
                                 ${data.paradoxes.map(p => `<li><span class="text-magenta-500 font-bold mr-2">》</span>${p}</li>`).join('')}
                             </ul>
                         </div>
                     </div>`;
                     break;
             }
-            return `<div class="slide w-full h-full p-8 overflow-y-auto">
-                        <img src="images/logo.png" alt="The Unseen Logo" class="absolute top-4 left-4 w-12 h-12" loading="lazy">
+            // The outer div structure is now consistent for all slide types
+            return `<div class="slide w-full h-full p-2 sm:p-8 overflow-y-auto">
+                        <img src="images/logo.png" alt="The Unseen Logo" class="absolute top-4 left-4 w-10 h-10 sm:w-12 sm:h-12" loading="lazy">
                         ${innerHtml}
                     </div>`;
         }
