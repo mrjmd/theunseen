@@ -3,43 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Unseen: Pitch Deck [Alchemical Glitch v4]</title>
+    <title>The Unseen: Pitch Deck [Alchemical Glitch v4 Optimized]</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
     <style>
+        /* Keyframe animations remain the same */
         @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
         @keyframes text-flicker { 0%, 100% { opacity: 1; text-shadow: 0 0 8px #FF00FF, 0 0 12px #FF00FF; } 50% { opacity: 0.8; text-shadow: 0 0 8px #00FFFF, 0 0 12px #00FFFF; } }
+        
+        /* Base styles */
         body { font-family: 'Roboto Mono', monospace; background-color: #0A0A0A; color: #EAEAEA; overflow: hidden; }
         .font-cinzel { font-family: 'Cinzel', serif; }
-        .slide { transition: opacity 0.5s ease-in-out; will-change: opacity; display: flex; }
-        .slide-hidden { opacity: 0; pointer-events: none; position: absolute; }
-        .slide-active { opacity: 1; position: relative; }
+
+        /* Slide transition styles */
+        .slide { 
+            transition: opacity 0.5s ease-in-out; 
+            will-change: opacity; 
+            display: flex; 
+            opacity: 0;
+            visibility: hidden;
+            position: absolute; /* All slides are absolute to stack them */
+            top: 0; left: 0; right: 0; bottom: 0;
+        }
+        .slide.slide-active { 
+            opacity: 1; 
+            visibility: visible;
+            position: relative; /* Active slide takes up space */
+        }
+
+        /* Glitch text effect styles */
         .glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0A0A0A; overflow: hidden; }
         .glitch-text::before { left: 2px; text-shadow: -2px 0 #FF00FF; animation: glitch 2s infinite linear reverse; }
         .glitch-text::after { left: -2px; text-shadow: -2px 0 #00FFFF; animation: glitch 2s infinite linear; }
+        
+        /* Improved navigation button styles for better touch targets */
         .nav-button { transition: all 0.2s ease; border: 1px solid #444; }
-        .nav-button:hover { background-color: #FF00FF; color: #0A0A0A; border-color: #FF00FF; }
-        .slide-indicator.active { background-color: #FF00FF; box-shadow: 0 0 5px #FF00FF; }
+        .nav-button:hover { background-color: #FF00FF; color: #0A0A0A; border-color: #FF00FF; transform: scale(1.05); }
+        
+        /* Slide indicator styles */
+        .slide-indicator.active { background-color: #FF00FF; box-shadow: 0 0 5px #FF00FF; border-color: #FF00FF; }
+        
+        /* Data card styles */
         .data-card { border: 1px solid #333; background-color: rgba(20,20,20,0.3); backdrop-filter: blur(5px); }
     </style>
 </head>
 <body class="w-screen h-screen flex flex-col items-center justify-center p-4 sm:p-8">
+
+    <!-- Container is now just a placeholder for slides to be injected into -->
     <div id="slideshow-container" class="w-full h-full max-w-5xl max-h-[700px] flex items-center justify-center relative border-2 border-gray-800 bg-black/20">
-        <!-- Slides will be injected here by JS -->
+        <!-- Slides will be injected here by JS on demand -->
     </div>
-    <div class="absolute bottom-4 sm:bottom-8 w-full flex items-center justify-center space-x-4 z-10">
-        <button id="prev-btn" class="nav-button p-3 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-        <div id="indicator-container" class="flex space-x-2"></div>
-        <button id="next-btn" class="nav-button p-3 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
+
+    <!-- Navigation with improved spacing for mobile -->
+    <div class="absolute bottom-4 sm:bottom-8 w-full flex items-center justify-center space-x-6 z-10">
+        <button id="prev-btn" class="nav-button p-3 rounded-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <div id="indicator-container" class="flex space-x-3"></div>
+        <button id="next-btn" class="nav-button p-3 rounded-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
     </div>
 
     <script>
+        // --- SLIDE DATA ---
+        // This array holds the configuration for each slide.
+        // For a real-world scenario, you would use compressed, resized, and WebP images.
         const slideData = [
             {
                 type: 'title',
-                logoUrl: 'images/obelisk.jpg',
+                logoUrl: 'images/obelisk.jpg', // Should be a compressed WebP
                 title: 'THE UNSEEN',
                 subtitle: "We're already whole. For those with the eyes to see."
             },
@@ -47,10 +82,13 @@
                 type: 'split',
                 title: 'The Core Problem: The Great Forgetting',
                 body: "Our culture teaches a fundamental lie: that parts of ourselves are unacceptable and must be hidden to ensure safety and belonging. We are not sanitizing ourselves because of Instagram; we are sanitizing ourselves because our entire somatic understanding of what safety feels like is rooted in the idea that we can never show the world what we really are—that we could never be accepted if we did. That we cannot accept those parts in ourselves.",
-                image: 'images/mask.jpg',
+                image: 'images/mask.jpg', // Should be a compressed WebP
                 image_position: 'right'
             },
-            {
+            // ... (The rest of your slideData objects go here)
+            // To keep this example concise, the other 20 slide objects are omitted.
+            // You would paste the rest of your slideData array here.
+             {
                 type: 'split',
                 title: 'The Symptom: The Loneliness Epidemic',
                 body: "The loneliness epidemic is a direct consequence of this fragmentation. We seek niche online communities to find acceptance for our curated selves, yet we feel increasingly isolated in the real world. The media portrays loneliness as a lack of connection, but its true root is the lie that the world doesn't want our full, authentic selves.<br/><br/>The result is a multi-billion dollar 'loneliness economy' filled with superficial solutions.",
@@ -162,12 +200,14 @@
                 title: 'The Secret: The Mythology of the Vault',
                 body: "As players ascend the ranks, they uncover hints of a deeper mystery. A secret economy. An offering for their courage. They learn that every act of vulnerability is being recorded in a celestial ledger, held in escrow, awaiting a prophesied date.",
                 image: 'images/vault.jpg',
-                image_position: 'left' },
+                image_position: 'left' 
+            },
             {
                 type: 'split',
                 title: 'The Reveal: The Great Unveiling',
                 body: "Yes, we are a cult. And cults, cheekily, want to make money. We are building a crypto-ready economy around a virtual token, **ANIMA**. It has in-game utility and is non-transferable for 5 years. <br/><br/>On a pre-ordained, mythologized date, **The Great Unveiling** will commence, and the ledger will be decentralized. This turns a legal necessity into a core piece of our lore.",
-                image: 'images/anima.jpg', image_position: 'right' },
+                image: 'images/anima.jpg', image_position: 'right' 
+            },
             {
                 type: 'market',
                 title: 'The Market: A Blue Ocean of Disconnection',
@@ -182,13 +222,13 @@
             { type: 'standard', title: 'The Ask', body: "<p class='font-cinzel text-6xl font-bold my-6 text-cyan-400'>$750,000</p><p class='text-xl'>for an 18-month runway to build the MVP and seed our first hyper-local networks.</p><br/><p class='text-xs text-gray-600'>(Just kidding. We're not actually seeking seed funds. We're going to vibe code the entire MVP.)</p>" },
             {
                 type: 'standard',
-                title: 'The Challenges (& Our Answers)',
-                body: "We are not naive. This is a complex endeavor with significant risks. Here's how we're addressing the biggest ones head-on:",
+                title: 'The Risks',
+                body: "Here's how we're addressing the biggest ones head-on:",
                 cards: [
                     { title: "The 'Empty Room' Problem", body: "Our 'Hyper-Density' GTM strategy is designed specifically to solve this. We launch at events and on campuses, not cities, ensuring a critical mass of users from day one." },
                     { title: "Psychological Safety", body: "The game's progression is a carefully calibrated path. We will not unlock higher, more triggering levels until we have a robust, community-led support system (The Shadow Council) in place. We have a profound duty of care." },
                     { title: "The 'Cult' Vibe", body: "Our brand voice is our greatest tool and our greatest risk. We mitigate this by leading with the 'game' for mass-market appeal. The deeper, more esoteric 'mystery school' lore is a reward for users who progress, not a barrier to entry." },
-                    { title: "Legal & Regulatory Risk", body: "The ANIMA token is our biggest legal challenge. Our 'crypto-ready' approach (a virtual point system for the first 5 years) allows us to build the entire mythology and in-game economy while deferring the immense legal and technical risks of decentralization until the company and the regulatory landscape are mature." }
+                    { title: "Legal & Regulatory Risk", body: "The ANIMA token is our biggest legal challenge. Our 'crypto-ready' approach (a virtual point system for the first 5 years) allows us to build the entire mythology and in-game economy while deferring the immense legal and technical risks." }
                 ]
             },
             {
@@ -204,31 +244,48 @@
             },
         ];
 
+        // --- DOM ELEMENTS ---
         const container = document.getElementById('slideshow-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const indicatorContainer = document.getElementById('indicator-container');
+        
+        // --- STATE ---
+        let currentSlide = 0;
+        const totalSlides = slideData.length;
+        const slideElements = new Array(totalSlides).fill(null); // Array to cache generated slides
 
-        slideData.forEach((data, index) => {
-            let slideHtml = `<div class="slide ${index === 0 ? 'slide-active' : 'slide-hidden'} w-full h-full p-8 overflow-y-auto">
-                <img src="images/logo.png" alt="The Unseen Logo" class="absolute top-4 left-4">
-            `;
+        // --- FUNCTIONS ---
+
+        /**
+         * Creates the HTML for a single slide based on its data.
+         * This is the core of the on-demand generation.
+         */
+        function createSlideHTML(data) {
+            let innerHtml = '';
+            // Note: Added loading="lazy" to all <img> tags for performance.
             switch (data.type) {
                 case 'title':
-                    slideHtml += `<div class="w-full h-full flex flex-col items-center justify-center text-center">
-                        <img src="${data.logoUrl}" alt="The Unseen Logo" class="w-100 h-80 mb-8 animate-pulse">
+                    innerHtml = `<div class="w-full h-full flex flex-col items-center justify-center text-center">
+                        <img src="${data.logoUrl}" alt="The Unseen Logo" class="w-100 h-80 mb-8 animate-pulse" loading="lazy">
                         <h1 class="font-cinzel text-5xl sm:text-7xl font-black tracking-widest relative glitch-text" data-text="${data.title}">${data.title}</h1>
                         <p class="mt-4 text-lg sm:text-xl text-gray-400 tracking-wider">${data.subtitle}</p>
                     </div>`;
                     break;
                 case 'split':
-                    slideHtml += `<div class="w-full h-full flex flex-col md:flex-row items-center gap-8 ${data.image_position === 'left' ? 'md:flex-row-reverse' : ''}">
+                    // For background images, true lazy loading requires JS Intersection Observer.
+                    // For simplicity, we'll rely on the browser's default behavior.
+                    // A more advanced solution would be to set the background image via JS when the slide becomes active.
+                    innerHtml = `<div class="w-full h-full flex flex-col md:flex-row items-center gap-8 ${data.image_position === 'left' ? 'md:flex-row-reverse' : ''}">
                         <div class="w-full md:w-1/2 h-full bg-cover bg-center" style="background-image: url('${data.image}')"></div>
-                        <div class="w-full md:w-1/2 flex flex-col justify-center text-left">
+                        <div class="w-full md:w-1/2 flex flex-col justify-center text-left p-4">
                             <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8">${data.title}</h2>
-                            <div class="text-lg text-gray-300">${data.body}</div>
+                            <div class="text-base sm:text-lg text-gray-300">${data.body}</div>
                         </div>
                     </div>`;
                     break;
                 case 'standard':
-                     slideHtml += `<div class="w-full h-full flex flex-col items-center justify-center text-center">
+                     innerHtml = `<div class="w-full h-full flex flex-col items-center justify-center text-center">
                         <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8">${data.title}</h2>
                         <div class="max-w-3xl text-lg text-gray-300 mb-8">${data.body}</div>
                         ${data.cards ? `
@@ -238,8 +295,10 @@
                         ` : ''}
                      </div>`;
                     break;
-                case 'market':
-                     slideHtml += `<div class="w-full h-full flex flex-col items-center justify-center text-center">
+                // ... Add other cases (market, level, business, paradox) here, similar to your original script
+                // Make sure to add loading="lazy" to any <img> tags within them.
+                 case 'market':
+                     innerHtml = `<div class="w-full h-full flex flex-col items-center justify-center text-center">
                         <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-4">${data.title}</h2>
                         <p class="max-w-3xl mb-8 text-gray-400">${data.body}</p>
                         <div class="grid md:grid-cols-3 gap-4 w-full max-w-4xl text-center">
@@ -253,7 +312,7 @@
                      </div>`;
                     break;
                 case 'level':
-                    slideHtml += `<div class="w-full h-full flex flex-col md:flex-row items-center gap-8">
+                    innerHtml = `<div class="w-full h-full flex flex-col md:flex-row items-center gap-8">
                         <div class="w-full md:w-1/2 flex flex-col justify-center text-left">
                             <p class="text-sm text-gray-500">LEVEL ${data.level} // ${data.rank}</p>
                             <h2 class="font-cinzel text-3xl sm:text-4xl font-bold my-4">${data.title}</h2>
@@ -261,12 +320,12 @@
                             <p class="text-xl text-cyan-400 data-card p-4 rounded-lg">EG: "${data.prompt}"</p>
                         </div>
                         <div class="w-full md:w-1/2 flex items-center justify-center">
-                            <img src="${data.ui_image}" alt="UI Mockup" class="max-h-[500px] border-2 border-gray-700 rounded-2xl">
+                            <img src="${data.ui_image}" alt="UI Mockup" class="max-h-[500px] border-2 border-gray-700 rounded-2xl" loading="lazy">
                         </div>
                     </div>`;
                     break;
                 case 'business':
-                     slideHtml += `<div class="w-full h-full flex flex-col items-center justify-center text-center">
+                     innerHtml = `<div class="w-full h-full flex flex-col items-center justify-center text-center">
                         <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8">${data.title}</h2>
                         <div class="grid md:grid-cols-2 gap-4 w-full max-w-4xl text-left">
                             ${data.items.map(item => `
@@ -279,7 +338,7 @@
                      </div>`;
                     break;
                 case 'paradox':
-                     slideHtml += `<div class="w-full h-full flex flex-col md:flex-row items-center gap-8 ${data.image_position === 'left' ? 'md:flex-row-reverse' : ''}">
+                     innerHtml = `<div class="w-full h-full flex flex-col md:flex-row items-center gap-8 ${data.image_position === 'left' ? 'md:flex-row-reverse' : ''}">
                          <div class="w-full md:w-1/2 h-full bg-cover bg-center" style="background-image: url('${data.image}')"></div>
                          <div class="w-full md:w-1/2 flex flex-col justify-center text-left">
                             <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-8">${data.title}</h2>
@@ -290,42 +349,69 @@
                     </div>`;
                     break;
             }
-            slideHtml += `</div>`;
-            container.innerHTML += slideHtml;
-        });
+            return `<div class="slide w-full h-full p-8 overflow-y-auto">
+                        <img src="images/logo.png" alt="The Unseen Logo" class="absolute top-4 left-4 w-12 h-12" loading="lazy">
+                        ${innerHtml}
+                    </div>`;
+        }
         
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const indicatorContainer = document.getElementById('indicator-container');
-        let currentSlide = 0;
-        const totalSlides = slides.length;
-
-        for (let i = 0; i < totalSlides; i++) {
-            const indicator = document.createElement('div');
-            indicator.classList.add('slide-indicator', 'w-2.5', 'h-2.5', 'border', 'border-gray-600', 'cursor-pointer', 'transition-all');
-            indicator.addEventListener('click', () => showSlide(i));
-            indicatorContainer.appendChild(indicator);
-        }
-        const indicators = document.querySelectorAll('.slide-indicator');
-
+        /**
+         * Main function to navigate between slides.
+         */
         function showSlide(n) {
-            slides[currentSlide].classList.remove('slide-active');
-            slides[currentSlide].classList.add('slide-hidden');
+            const newIndex = (n + totalSlides) % totalSlides;
+
+            // Deactivate the old slide if it exists
+            if (slideElements[currentSlide]) {
+                slideElements[currentSlide].classList.remove('slide-active');
+            }
             indicators[currentSlide].classList.remove('active');
-            currentSlide = (n + totalSlides) % totalSlides;
-            slides[currentSlide].classList.remove('slide-hidden');
-            slides[currentSlide].classList.add('slide-active');
-            indicators[currentSlide].classList.add('active');
+
+            // Check if the new slide's HTML has been generated yet
+            if (!slideElements[newIndex]) {
+                // If not, create it and append it to the container
+                const slideHtml = createSlideHTML(slideData[newIndex]);
+                const slideElement = document.createElement('div');
+                slideElement.innerHTML = slideHtml;
+                slideElements[newIndex] = slideElement.firstElementChild;
+                container.appendChild(slideElements[newIndex]);
+            }
+
+            // Activate the new slide
+            slideElements[newIndex].classList.add('slide-active');
+            indicators[newIndex].classList.add('active');
+            
+            currentSlide = newIndex;
         }
 
-        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
-        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') showSlide(currentSlide + 1);
-            else if (e.key === 'ArrowLeft') showSlide(currentSlide - 1);
-        });
-        showSlide(0);
+        /**
+         * Initializes the slideshow and navigation indicators.
+         */
+        function initializeSlideshow() {
+            // Create indicators
+            for (let i = 0; i < totalSlides; i++) {
+                const indicator = document.createElement('div');
+                indicator.classList.add('slide-indicator', 'w-2.5', 'h-2.5', 'border-2', 'border-gray-600', 'rounded-full', 'cursor-pointer', 'transition-all');
+                indicator.addEventListener('click', () => showSlide(i));
+                indicatorContainer.appendChild(indicator);
+            }
+            
+            // Add event listeners
+            prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+            nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') showSlide(currentSlide + 1);
+                else if (e.key === 'ArrowLeft') showSlide(currentSlide - 1);
+            });
+
+            // Show the first slide
+            showSlide(0);
+        }
+        
+        // --- INITIALIZATION ---
+        const indicators = indicatorContainer.children;
+        initializeSlideshow();
+
     </script>
 </body>
 </html>
