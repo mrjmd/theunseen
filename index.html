@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Unseen: Pitch Deck</title>
     
-    <!-- Preload critical resources like fonts and CSS -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <!-- Use a script tag for Tailwind CSS CDN as required by their documentation -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Preload critical resources like fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +23,7 @@
         @keyframes text-flicker { 0%, 100% { opacity: 1; text-shadow: 0 0 8px #FF00FF, 0 0 12px #FF00FF; } 50% { opacity: 0.8; text-shadow: 0 0 8px #00FFFF, 0 0 12px #00FFFF; } }
         
         /* Base styles */
-        html, body { height: 100%; overflow: hidden; } /* Prevent body scroll */
+        html { overflow: hidden; } /* Prevent body scroll on the html element */
         body { font-family: 'Roboto Mono', monospace; background-color: #0A0A0A; color: #EAEAEA; }
         .font-cinzel { font-family: 'Cinzel', serif; }
 
@@ -66,16 +67,16 @@
         .data-card { border: 1px solid #333; background-color: rgba(20,20,20,0.3); backdrop-filter: blur(5px); }
     </style>
 </head>
-<body class="w-screen h-dynamic-screen flex flex-col items-center justify-center">
+<body>
 
-    <main class="w-full h-full flex flex-col p-4 sm:p-8">
+    <main class="w-screen h-dynamic-screen flex flex-col p-4 sm:p-8">
         <!-- Container now has a touch-action property to improve swipe experience -->
         <div id="slideshow-container" class="w-full flex-grow max-w-5xl mx-auto flex items-center justify-center relative border-2 border-gray-800 bg-black/20 rounded-lg overflow-hidden" style="touch-action: pan-y;">
             <!-- Slides will be injected here by JS on demand -->
         </div>
 
         <!-- Navigation with responsive indicators -->
-        <div class="w-full max-w-5xl mx-auto flex items-center justify-center space-x-6 z-10 pt-4">
+        <div class="w-full max-w-5xl mx-auto flex items-center justify-center space-x-6 z-10 pt-4 flex-shrink-0">
             <button id="prev-btn" class="nav-button p-3 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             </button>
@@ -94,15 +95,11 @@
 
     <script>
         // --- DYNAMIC VIEWPORT HEIGHT FIX ---
-        // This addresses the issue on mobile browsers where the viewport height unit (vh)
-        // doesn't account for the browser's UI (like the address bar).
         function setViewportHeight() {
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
-        // Set the height on initial load
         setViewportHeight();
-        // Reset the height whenever the window is resized (e.g., orientation change)
         window.addEventListener('resize', setViewportHeight);
 
 
@@ -119,42 +116,48 @@
                 title: 'The Core Problem: The Great Forgetting',
                 body: "Our culture teaches a fundamental lie: that parts of ourselves are unacceptable and must be hidden to ensure safety and belonging.<br /><br />Our somatic understanding of safety is rooted in the idea that we can never show the world what we really are — that we could never be worthy of acceptance if we did.",
                 image: 'images/mask.webp',
-                image_position: 'right'
+                image_position: 'right',
+                image_focus: 'top' // Focus on the top of the mask image
             },
              {
                 type: 'split',
                 title: 'The Symptom: The Loneliness Epidemic',
                 body: "The 'loneliness epidemic' is a direct consequence of this fragmentation. People choose to languish in alienation, depression, addition, etc. The media portrays loneliness as a lack of connection, but its true root is the lie that the world won't allow our full, authentic selves.<br/><br/>The result is a multi-billion dollar 'loneliness economy' filled with superficial solutions.",
                 image: 'images/symptom.webp',
-                image_position: 'left'
+                image_position: 'left',
+                image_focus: 'center'
             },
             {
                 type: 'split',
                 title: 'The Blocker: The Need for a Ladder',
                 body: "Most people cannot handle going straight into the fire of true shadow work. The psychological defenses are too strong. The social conditioning runs too deep. They need massive training wheels. They need a gentle, progressive path that meets them where they are and skillfully guides them deeper.<br/><br/>They don't need a destination. They need a ladder. We have built that ladder.",
                 image: 'images/ladder.webp',
-                image_position: 'right'
+                image_position: 'right',
+                image_focus: 'bottom' // Focus on the bottom of the ladder
             },
             {
                 type: 'split',
                 title: 'Our Solution: A Spontaneous Dojo for the Soul',
                 body: "A gamified, P2P mobile experience that turns the friction of human interaction into the grist for the mill of self-discovery. It's a space to practice the art of connection, in real-time, with strangers.<br/><br/>The goal is not to feel good. The goal is to feel *everything*. We don't avoid triggers; we gamify them. We don't prevent rejection; we build a playground around it, and ease you in.",
                 image: 'images/dojo.webp',
-                image_position: 'right'
+                image_position: 'right',
+                image_focus: 'center'
             },
             {
                 type: 'split',
                 title: 'The Game Aesthetic: A Progressive Initiation',
                 body: "The app's UI is part of the journey. New users are welcomed with a clean, familiar, light-mode interface—the ultimate 'normie mode' training wheels. As they prove their courage and ascend the ranks, the UI itself begins to transform. At key initiations, the interface will 'exfoliate,' cracking and peeling away to reveal the darker, more esoteric, and more alive 'Alchemical Glitch' aesthetic hiding beneath. The app grows with you. The container becomes the crucible.",
                 image: 'images/ui-exfoliation.webp',
-                image_position: 'left'
+                image_position: 'left',
+                image_focus: 'center'
             },
             {
                 type: 'split',
                 title: 'The Game Mythology: A Self-Aware Cult',
                 body: "We are a modern mystery school that knows it's a mystery school. You are not a 'user'; you are an 'Initiate.' This is not an 'app'; it's a 'Dojo.' Prompts are 'Incantations.' An in-person meeting is 'The Crossing.' Our voice is a paradoxical blend of profound sincerity and cheeky, provocative humor. We acknowledge the absurdity of gamifying enlightenment while being deadly serious about the transformative power of the work. We are the cult that wants you to think for yourself.",
                 image: 'images/mythology.webp',
-                image_position: 'right'
+                image_position: 'right',
+                image_focus: 'center'
             },
             {
                 type: 'standard',
@@ -172,7 +175,8 @@
                 title: 'The Unfolding Initiations',
                 body: "Ascending to a new major Level is not automatic. It is a rite of passage. It requires not just the accumulation of ANIMA (points), but the successful completion of a 'Trial'—a specific, challenging task designed to test the skills of that level. These trials are vetted by higher-level players ('Seers'), ensuring that progression is a measure of genuine growth, not just grinding. Any player can choose to plateau at a level they are comfortable with, continuing to play and practice within that container for as long as they wish.",
                 image: 'images/initiation.webp',
-                image_position: 'left'
+                image_position: 'left',
+                image_focus: 'bottom' // Focus on the figure at the bottom
             },
             {
                 type: 'level',
@@ -233,13 +237,16 @@
                 title: 'The Secret: The Mythology of the Vault',
                 body: "As players ascend the ranks, they uncover hints of a deeper mystery. A secret economy. An offering for their courage. They learn that every act of vulnerability is being recorded in a celestial ledger, held in escrow, awaiting a prophesied date.",
                 image: 'images/vault.webp',
-                image_position: 'left' 
+                image_position: 'left',
+                image_focus: 'center'
             },
             {
                 type: 'split',
                 title: 'The Reveal: The Great Unveiling',
                 body: "Yes, we are a cult. And cults, cheekily, want to make money. We are building a crypto-ready economy around a virtual token, **ANIMA**. It has in-game utility and is non-transferable for 5 years. <br/><br/>On a pre-ordained, mythologized date, **The Great Unveiling** will commence, and the ledger will be decentralized. This turns a legal necessity into a core piece of our lore.",
-                image: 'images/anima.webp', image_position: 'right' 
+                image: 'images/anima.webp',
+                image_position: 'right',
+                image_focus: 'top'
             },
             {
                 type: 'market',
@@ -273,7 +280,8 @@
                     "A game where the only opponent is your own self-deception.",
                     "A mirror that shows you your own face by looking at a stranger."
                 ],
-                image: 'images/paradox.webp'
+                image: 'images/paradox.webp',
+                image_focus: 'top' // Focus on the snake and top of the mask
             },
         ];
 
@@ -301,7 +309,7 @@
          */
         function createSlideHTML(data) {
             let innerHtml = '';
-            // Note: Added loading="lazy" to all <img> tags for performance.
+            
             switch (data.type) {
                 case 'title':
                     innerHtml = `<div class="w-full h-full flex flex-col items-center justify-center text-center">
@@ -311,12 +319,28 @@
                     </div>`;
                     break;
                 case 'split':
-                    innerHtml = `<div class="w-full h-full flex flex-col md:flex-row items-center justify-center gap-0 md:gap-8 ${data.image_position === 'left' ? 'md:flex-row-reverse' : ''}">
-                        <div class="w-full h-48 md:h-full md:w-1/2 bg-cover bg-center flex-shrink-0" style="background-image: url('${data.image}')"></div>
-                        <div class="w-full md:w-1/2 flex flex-col justify-center text-left p-6 md:p-4">
+                case 'paradox': // Handle paradox the same as split for layout
+                    const focusPoint = data.image_focus || 'center'; // Default to center if not specified
+                    const imageDiv = `<div class="w-full h-48 md:h-full md:w-1/2 bg-cover bg-no-repeat flex-shrink-0" style="background-image: url('${data.image}'); background-position: center ${focusPoint};"></div>`;
+                    
+                    let textContent;
+                    if (data.type === 'paradox') {
+                        textContent = `<div class="w-full md:w-1/2 flex flex-col justify-center text-left p-6 md:p-4">
+                            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-4 md:mb-8">${data.title}</h2>
+                            <ul class="text-left space-y-4 text-lg sm:text-xl">
+                                ${data.paradoxes.map(p => `<li><span class="text-magenta-500 font-bold mr-2">》</span>${p}</li>`).join('')}
+                            </ul>
+                        </div>`;
+                    } else {
+                        textContent = `<div class="w-full md:w-1/2 flex flex-col justify-center text-left p-6 md:p-4">
                             <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-4 md:mb-8">${data.title}</h2>
                             <div class="text-base sm:text-lg text-gray-300">${data.body}</div>
-                        </div>
+                        </div>`;
+                    }
+
+                    innerHtml = `<div class="w-full h-full flex flex-col md:flex-row items-center justify-center gap-0 md:gap-8 ${data.image_position === 'left' ? 'md:flex-row-reverse' : ''}">
+                        ${imageDiv}
+                        ${textContent}
                     </div>`;
                     break;
                 case 'standard':
@@ -369,17 +393,6 @@
                             `).join('')}
                         </div>
                      </div>`;
-                    break;
-                case 'paradox':
-                     innerHtml = `<div class="w-full h-full flex flex-col md:flex-row items-center justify-center gap-0 md:gap-8">
-                         <div class="w-full h-48 md:h-full md:w-1/2 bg-cover bg-center flex-shrink-0" style="background-image: url('${data.image}')"></div>
-                         <div class="w-full md:w-1/2 flex flex-col justify-center text-left p-6 md:p-4">
-                            <h2 class="font-cinzel text-3xl sm:text-4xl font-bold mb-4 md:mb-8">${data.title}</h2>
-                            <ul class="text-left space-y-4 text-lg sm:text-xl">
-                                ${data.paradoxes.map(p => `<li><span class="text-magenta-500 font-bold mr-2">》</span>${p}</li>`).join('')}
-                            </ul>
-                        </div>
-                    </div>`;
                     break;
             }
             // The outer div structure is now consistent for all slide types
