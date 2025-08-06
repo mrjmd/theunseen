@@ -3,20 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Unseen: Pitch Deck [Alchemical Glitch v7 - Dynamic Layout]</title>
+    <title>The Unseen: Pitch Deck [Alchemical Glitch v8 - Final Performance Tweaks]</title>
+    
+    <!-- Use a script tag for Tailwind CSS CDN as required by their documentation -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Preload critical resources like fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Fallback for browsers that don't support preload -->
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap"></noscript>
+
     <style>
         /* Keyframe animations remain the same */
         @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
         @keyframes text-flicker { 0%, 100% { opacity: 1; text-shadow: 0 0 8px #FF00FF, 0 0 12px #FF00FF; } 50% { opacity: 0.8; text-shadow: 0 0 8px #00FFFF, 0 0 12px #00FFFF; } }
         
         /* Base styles */
-        html, body { height: 100%; overflow: hidden; } /* Prevent body scroll */
+        html { overflow: hidden; } /* Prevent body scroll on the html element */
         body { font-family: 'Roboto Mono', monospace; background-color: #0A0A0A; color: #EAEAEA; }
         .font-cinzel { font-family: 'Cinzel', serif; }
+
+        /* Dynamic viewport height for mobile browsers */
+        .h-dynamic-screen {
+            height: 100vh; /* Fallback for browsers that don't support Custom Properties */
+            height: calc(var(--vh, 1vh) * 100);
+        }
 
         /* Slide transition styles */
         .slide { 
@@ -27,7 +42,6 @@
             visibility: hidden;
             position: absolute; /* All slides are absolute to stack them */
             top: 0; left: 0; right: 0; bottom: 0;
-            /* Prevent text selection during swipe */
             user-select: none;
             -webkit-user-select: none;
         }
@@ -53,16 +67,16 @@
         .data-card { border: 1px solid #333; background-color: rgba(20,20,20,0.3); backdrop-filter: blur(5px); }
     </style>
 </head>
-<body class="w-screen h-screen flex flex-col items-center justify-center">
+<body>
 
-    <main class="w-full h-full flex flex-col p-4 sm:p-8">
+    <main class="w-screen h-dynamic-screen flex flex-col p-4 sm:p-8">
         <!-- Container now has a touch-action property to improve swipe experience -->
         <div id="slideshow-container" class="w-full flex-grow max-w-5xl mx-auto flex items-center justify-center relative border-2 border-gray-800 bg-black/20 rounded-lg overflow-hidden" style="touch-action: pan-y;">
             <!-- Slides will be injected here by JS on demand -->
         </div>
 
         <!-- Navigation with responsive indicators -->
-        <div class="w-full max-w-5xl mx-auto flex items-center justify-center space-x-6 z-10 pt-4">
+        <div class="w-full max-w-5xl mx-auto flex items-center justify-center space-x-6 z-10 pt-4 flex-shrink-0">
             <button id="prev-btn" class="nav-button p-3 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             </button>
@@ -80,6 +94,19 @@
     </main>
 
     <script>
+        // --- DYNAMIC VIEWPORT HEIGHT FIX ---
+        // This addresses the issue on mobile browsers where the viewport height unit (vh)
+        // doesn't account for the browser's UI (like the address bar).
+        function setViewportHeight() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        // Set the height on initial load
+        setViewportHeight();
+        // Reset the height whenever the window is resized (e.g., orientation change)
+        window.addEventListener('resize', setViewportHeight);
+
+
         // --- SLIDE DATA ---
         const slideData = [
             {
