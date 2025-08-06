@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Unseen: Pitch Deck [Alchemical Glitch v8 - Final Performance Tweaks]</title>
     
+    <!-- Preload critical resources like fonts and CSS -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <!-- Use a script tag for Tailwind CSS CDN as required by their documentation -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Preload critical resources like fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +22,7 @@
         @keyframes text-flicker { 0%, 100% { opacity: 1; text-shadow: 0 0 8px #FF00FF, 0 0 12px #FF00FF; } 50% { opacity: 0.8; text-shadow: 0 0 8px #00FFFF, 0 0 12px #00FFFF; } }
         
         /* Base styles */
-        html { overflow: hidden; } /* Prevent body scroll on the html element */
+        html, body { height: 100%; overflow: hidden; } /* Prevent body scroll */
         body { font-family: 'Roboto Mono', monospace; background-color: #0A0A0A; color: #EAEAEA; }
         .font-cinzel { font-family: 'Cinzel', serif; }
 
@@ -67,16 +66,16 @@
         .data-card { border: 1px solid #333; background-color: rgba(20,20,20,0.3); backdrop-filter: blur(5px); }
     </style>
 </head>
-<body>
+<body class="w-screen h-dynamic-screen flex flex-col items-center justify-center">
 
-    <main class="w-screen h-dynamic-screen flex flex-col p-4 sm:p-8">
+    <main class="w-full h-full flex flex-col p-4 sm:p-8">
         <!-- Container now has a touch-action property to improve swipe experience -->
         <div id="slideshow-container" class="w-full flex-grow max-w-5xl mx-auto flex items-center justify-center relative border-2 border-gray-800 bg-black/20 rounded-lg overflow-hidden" style="touch-action: pan-y;">
             <!-- Slides will be injected here by JS on demand -->
         </div>
 
         <!-- Navigation with responsive indicators -->
-        <div class="w-full max-w-5xl mx-auto flex items-center justify-center space-x-6 z-10 pt-4 flex-shrink-0">
+        <div class="w-full max-w-5xl mx-auto flex items-center justify-center space-x-6 z-10 pt-4">
             <button id="prev-btn" class="nav-button p-3 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             </button>
